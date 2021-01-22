@@ -22,3 +22,9 @@ export function logout() {
     method: 'post'
   })
 }
+export const getGuildConfig = () => {
+  return request({
+    url: '/guild/guild/getGuildConfig',
+    method: 'post'
+  })
+}
