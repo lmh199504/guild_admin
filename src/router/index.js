@@ -100,7 +100,7 @@ export const constantRoutes = [
       {
         path: 'index',
         component: () => import('@/myviews/changepassword/index'),
-        name: 'set',
+        name: 'changepassword',
         meta: { title: '修改密码', noCache: true }
       }
     ]
