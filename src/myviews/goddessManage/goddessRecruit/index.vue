@@ -19,7 +19,7 @@
     </el-form>
 
     <!-- 生成链接 start-->
-    <el-dialog class="a_dialog" title="提示" :visible.sync="dialogVisible" width="40%" :before-close="handleClose">
+    <el-dialog class="a_dialog" title="提示" :visible.sync="dialogVisible">
       <div v-loading="codeLoading" class="a_dialog_div">
         <span class="a_dialog_span">推广二维码：</span>
         <img class="a_dialog_img" :src="shareImg" alt="">
@@ -104,8 +104,24 @@ export default {
       isShare: false,
       shareImg: '',
       shareUrl: '',
-      facilityList: null,
-      templateList: null,
+      facilityList: [
+        { name: '微信', value: 'WECHAT' },
+        { name: 'QQ', value: 'QQ' },
+        { name: '抖音', value: 'DY' },
+        { name: '连信', value: 'LX' },
+        { name: '通用', value: 'WEB' },
+        { name: '长链接', value: 'LONG' }
+      ],
+      templateList: [
+        { name: '女神招募', value: 'QYRECRUIT' },
+        { name: '默认推广', value: 'QYDEFAULT' },
+        { name: '性感推广一', value: 'QYSEXY1' },
+        { name: '性感推广二', value: 'QYSEXY2' },
+        { name: '性感推广三', value: 'QYSEXY3' },
+        { name: '性感推广四', value: 'QYSEXY4' },
+        { name: '性感推广五', value: 'QYSEXY5' },
+        { name: '性感推广六', value: 'QYSEXY6' }
+      ],
       dialogVisible: false,
       form: {
         facility: '', // 推广设备类型
