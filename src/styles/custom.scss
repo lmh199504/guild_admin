@@ -8,10 +8,57 @@
   margin-bottom: 15px;
 }
 
+//我的设置
+.temp_ul .el-form-item__content{
+  margin-left: 100px!important;
+}
+.temp_ul .el-form-item__label{
+  width: 98px!important;
+}
+.el-textarea__inner{
+  max-width: 500px;
+}
+.temp_ul .el-radio{
+  margin: 5px 30px 5px 0;
+}
+
+
+.jurisdiction .el-input,.jurisdiction .el-select{
+    width: 300px;
+    margin-right: 5px;
+}
+.jurisdiction .el-form-item__label {
+  line-height: 20px;
+  padding-top: 10px;
+}
+.el-dialog {
+    max-height: 700px !important;
+    overflow-y: auto;
+}
 @media screen and ( max-width: 470px ) {
   .a_dialog{
     .el-dialog{
       width: 90%;
     }
+  }
+  .data_form .el-form-item__content{
+    width: 72%!important;
+  }
+  .data_form .data_form_picker{
+    margin-bottom: 22px;
+  }
+
+  .el-dialog{
+    width: 90%!important;
+    max-height: 520px!important;
+    overflow-y: scroll;
+  }
+
+  .jurisdiction .el-input,.jurisdiction .el-select{
+    width: 190px!important;
+    margin-right: 5px;
+  }
+  .el-message-box{
+    width: 90%!important;
   }
 }

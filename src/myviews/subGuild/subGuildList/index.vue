@@ -18,7 +18,6 @@
       <el-table-column prop="guild_id" label="公会ID" width="100" align="center" />
       <el-table-column prop="guild_name" label="公会昵称" min-width="110" align="center" />
       <el-table-column prop="cash" label="可提现余额" min-width="100" align="center" />
-      <!-- <el-table-column prop="frozen_cash" label="冻结金额" min-width="100" align="center"></el-table-column>s -->
       <el-table-column prop="addtime" label="开通时间" min-width="100" align="center" />
       <el-table-column prop="last_login_time" label="上次登录时间" min-width="100" align="center" />
       <el-table-column width="380" label="操作" align="center">
@@ -80,7 +79,9 @@ export default {
   },
   data() {
     return {
-      list: null,
+      list: [
+        {}
+      ],
       count: 0, // 列表数据总条数
       getlist: {
         limit: 10, // 每页条数
@@ -97,7 +98,10 @@ export default {
       activeName: 'edit_first',
       currentData: null,
       isNew: false, // 是否新增公会,
-      GuildConfig: {},
+      GuildConfig: {
+        guild_type: 1,
+        create_guild: 1
+      },
       fronzen_dia: false // 冻结弹窗
     }
   },

@@ -158,7 +158,7 @@ export const asyncRoutes = [
     component: Layout,
     name: 'finance',
     redirect: 'noRedirect',
-    meta: { title: '财务管理', icon: 'ghmx' },
+    meta: { title: '财务管理', icon: 'finance' },
     children: [
       {
         path: 'cashLog',
