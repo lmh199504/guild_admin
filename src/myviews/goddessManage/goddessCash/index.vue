@@ -1,16 +1,6 @@
 <template>
   <div class="app-container generalize">
     <el-form ref="form" :model="getlist" :inline="true">
-      <!-- <el-form-item label="主播ID">
-        <el-col>
-          <el-input v-model="getlist.anchor_id" placeholder="请输入主播ID" />
-        </el-col>
-      </el-form-item>
-      <el-form-item label="主播昵称">
-        <el-col>
-          <el-input v-model="getlist.anchor_nickname" placeholder="请输入主播昵称" />
-        </el-col>
-      </el-form-item> -->
       <el-form-item label="提现状态">
         <el-col>
           <el-select v-model="getlist.type" placeholder="请选择">
