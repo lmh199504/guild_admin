@@ -80,7 +80,7 @@ export default {
   },
   data() {
     return {
-      list: null,
+      list: [{}],
       count: 0, // 列表数据总条数
       // form: {
       //   "id": '',//记录ID
@@ -125,6 +125,7 @@ export default {
     },
     onSearch() {
       // 搜索
+      this.getlist.page = 1
       this.fetchData()
     },
     handleSizeChange(val) {

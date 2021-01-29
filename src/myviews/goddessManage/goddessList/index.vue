@@ -197,7 +197,7 @@ export default {
   },
   data() {
     return {
-      list: null,
+      list: [{}],
       count: 0, // 列表数据总条数
       form: {
         member_id: '', // 用户ID

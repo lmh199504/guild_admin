@@ -37,7 +37,7 @@
     </el-dialog>
     <!-- 生成链接 end-->
 
-    <el-table class="table_a" :data="list" style="width: 100%" max-height="650">
+    <el-table v-loading="listLoading" class="table_a" :data="list" style="width: 100%" max-height="650">
       <el-table-column
         prop="facility"
         label="推广设备类型"
@@ -51,7 +51,6 @@
         align="center"
       />
       <el-table-column
-        prop="is_cert"
         label="推广二维码"
         min-width="110"
         align="center"
@@ -61,7 +60,6 @@
         </template>
       </el-table-column>
       <el-table-column
-        prop="money_fee"
         label="推广链接"
         min-width="100"
         align="center"
@@ -69,7 +67,6 @@
         <template slot-scope="scope">{{ scope.row.url }}</template>
       </el-table-column>
       <el-table-column
-        prop="is_black"
         label="操作"
         width="110"
         align="center"
@@ -82,7 +79,7 @@
   </div>
 </template>
 <script>
-import { generalizeUrl, getGeneralizeType, getGeneralizeCache } from '@/api/guild'
+import CodeImg from './codeImg.js'
 import { base64ToBlob } from '@/utils/download'
 import clipboard from '@/directive/clipboard/index.js' // use clipboard by v-directive
 export default {
@@ -102,8 +99,8 @@ export default {
   data() {
     return {
       isShare: false,
-      shareImg: '',
-      shareUrl: '',
+      shareImg: '', // 生成的分享二维码
+      shareUrl: '', // 生成的分享地址
       facilityList: [
         { name: '微信', value: 'WECHAT' },
         { name: 'QQ', value: 'QQ' },
@@ -129,47 +126,34 @@ export default {
         reset: 'YES' // 跳过缓存重新生成二维码（不传默认为否）/ 是：YES / 否：NO
       },
       list: null,
+      listLoading: false,
       codeLoading: false
     }
   },
   created() {
-    getGeneralizeType().then(res => {
-      this.facilityList = res.data.facilityType
-      this.templateList = res.data.templateType
-      this.form.facility = this.facilityList[0].value
-      this.form.template = this.templateList[0].value
-    })
-
-    this.getTableData()
+    this.getList()
   },
   methods: {
     // 生成
     onSubmit() {
       this.dialogVisible = true
-      this.isShare = true
-      this.getGeneralize()
+      this.createLink()
     },
     // 关闭弹窗
     toTrue() {
       this.dialogVisible = false
     },
-    // 关闭弹窗
-    handleClose() {
-      this.dialogVisible = false
-    },
     // 获取推广域名
-    getGeneralize() {
-      var data = this.form
+    createLink() {
       this.codeLoading = true
-      generalizeUrl(data).then(response => {
-        this.shareImg = response.data.img_url
-        this.shareUrl = response.data.url
+      this.isShare = true
+      setTimeout(() => {
+        this.shareImg = CodeImg
+        this.shareUrl = 'http://www.baidu.com'
         this.isShare = false
         this.codeLoading = false
-        this.getTableData()
-      }).catch(() => {
-        this.codeLoading = false
-      })
+        this.getList()
+      }, 1000)
     },
     // 下载图片
     download() {
@@ -180,14 +164,10 @@ export default {
     downloadFile(fileName, content) {
       const aLink = document.createElement('a')
       const blob = base64ToBlob(content) // new Blob([content]);
-
       const evt = document.createEvent('HTMLEvents')
       evt.initEvent('click', true, true)// initEvent 不加后两个参数在FF下会报错  事件类型，是否冒泡，是否阻止浏览器的默认行为
       aLink.download = fileName
       aLink.href = URL.createObjectURL(blob)
-
-      // aLink.dispatchEvent(evt);
-      // aLink.click()
       aLink.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }))// 兼容火狐
     },
     onCopy(e) {
@@ -196,10 +176,14 @@ export default {
     onError(e) {
       this.$message.error('抱歉，复制失败！')
     },
-    getTableData() {
-      getGeneralizeCache().then(res => {
-        this.list = res.data.cache
-      })
+    getList() {
+      this.listLoading = true
+      setTimeout(() => {
+        this.list = [
+          { facility: '微信', template: '女神招募', img_url: CodeImg, url: 'http://www.baidu.com' }
+        ]
+        this.listLoading = false
+      }, 1000)
     }
   }
 }
